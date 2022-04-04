@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Relating species characteristics to their environmnent - RDA</title>
+    <meta charset="utf-8" />
+    <meta name="date" content="2022-05-04" />
+    <script src="assets/header-attrs-2.9/header-attrs.js"></script>
+    <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="R.css" type="text/css" />
+    <link rel="stylesheet" href="fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Relating species characteristics to their environmnent - RDA
+### 
+### 05/04/2022
+
+---
+
+
+
+
+
+# About me: Gabriel Muñoz  
+
+**Quantitative Ecologist**
+
+**Macroecology** 
+
+**Ph.D. candidate** in Biological Sciences @Concordia University
+
+- Supervisor Dr. J.P. Lessard 
+
+
+**M.Sc. Biology**, *track* Ecology and Evolution @University of Amsterdam, NL
+
+**B.Sc. Biology**  @Universidad San Francisco de Quito, EC
+
+
+&lt;img src="images/Lab Logo.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Learning objectives:
+
+&lt;br&gt;
+
+
+**Quantify variation in functional trait diversity along environmental gradients** 
+
+
+&lt;br&gt;
+
+## Lecture structure 
+
+1) Functional Ecology (~20min)
+
+2) Redundancy Analysis (RDA) (~15min)
+
+3) Case study (~30 min)
+
+&lt;br&gt;
+
+.alert[You can stop me anytime for questions]
+
+
+
+---
+class: inverse, center, middle
+# 1. Functional Ecology
+
+---
+# The diversity of lifeforms and climates 
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Cuyabeno.jpeg" alt=" Flooded forests in Cuyabeno, Sucumbios Ecuador" width="80%" /&gt;
+&lt;p class="caption"&gt; Flooded forests in Cuyabeno, Sucumbios Ecuador&lt;/p&gt;
+&lt;/div&gt;
+---
+# The diversity of lifeforms and climates 
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/CEiboManabi.jpeg" alt="Ceibo-Manabí, Ecuador" width="80%" /&gt;
+&lt;p class="caption"&gt;Ceibo-Manabí, Ecuador&lt;/p&gt;
+&lt;/div&gt;
+---
+# The diversity of lifeforms and climates  
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/lengaPatagonia.JPG" alt="Lenga forest, El Chalten, Patagonia, Argentina" width="80%" /&gt;
+&lt;p class="caption"&gt;Lenga forest, El Chalten, Patagonia, Argentina&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+# The diversity of lifeforms and climates  
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Atacama.JPG" alt="Atacama desert, Chile" width="80%" /&gt;
+&lt;p class="caption"&gt;Atacama desert, Chile&lt;/p&gt;
+&lt;/div&gt;
+
+---
+# The dimensions of biodiversity
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+---
+# Species traits 
+
+.alert[Traits: species unique characteristics]
+
+- **Traits that allows species to live where they live**
+
+- Traits that allow species to interact with others
+
+- Traits that influence the impact of a species in the ecosystem
+
+&lt;img src="images/Mammals.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+.alert[Functional diversity]
+
+---
+# The ecological niche 
+
+.alert[Niche: The relative positioning of species in a ecological space]
+
+- Grinnellian niche view: Species environmental tolerances (physiological requirements)
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/drosophilagrowth.jpeg" alt="Drosophila growth, Bozinovic et al., 2011" width="60%" /&gt;
+&lt;p class="caption"&gt;Drosophila growth, Bozinovic et al., 2011&lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+# The ecological niche 
+
+.alert[Niche: The relative positioning of species in a ecological space]
+
+
+- Eltonian niche view : Biotic dimensions (species interactions)
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/radiation.jpeg" alt="Finch radiation" width="80%" /&gt;
+&lt;p class="caption"&gt;Finch radiation&lt;/p&gt;
+&lt;/div&gt;
+
+---
+# The ecological niche 
+
+.alert[Niche: The relative positioning of species in a ecological space]
+
+- Hutchinson: n-dimensional hypervolume (both Env + Int)
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/hutch.png" alt="High dimensional volume" width="60%" /&gt;
+&lt;p class="caption"&gt;High dimensional volume&lt;/p&gt;
+&lt;/div&gt;
+
+
+.alert[!Neutral theory of biodiversity: All species are equivalent]
+
+---
+# Niche-based assembly processes 
+
+
+.alert[.small[Ecological communities: 
+Sets of interacting species within a
+considerable area of space and period of time  ]]
+
+.alert[Deterministic processes]
+
+- Species sorting / Limiting similarity principle 
+
+- Fundamental and realized niches
+
+
+&lt;img src="images/sortingCExclusion.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+#  The composition of biotas across environmental gradients 
+
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/WhittkerPlot.png" alt="Whittaker plot" width="50%" /&gt;
+&lt;p class="caption"&gt;Whittaker plot&lt;/p&gt;
+&lt;/div&gt;
+
+---
+# Funtional diversity, a driver of innovation in Community Ecology 
+
+
+Species functional traits --&gt; ** Phenotypes reflecting species adaptations to their ecological niches**
+
+- Allow testing more mechanistic hypothesis in community assembly 
+
+- Relate species functions to climatic variation 
+
+- Identify transition zones 
+
+- Predict consequences of global climate changes in biodiversity
+
+---
+# Functional diversity, the knowledge gap
+
+- Global trait databases
+
+- Species responses to global change
+
+
+https://www.try-db.org/TryWeb/Home.php
+
+
+
+&lt;img src="images/plantTraits.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Calculating functional diversity: Functional position (identity)
+
+
+`$$CWM = \dfrac{\sum_{i = 1}^{n} (x_i \times w_i)}{ \sum_{i = 1}^{n} (w_i)}$$`
+
+
+&lt;img src="images/CWM.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+# Calculating functional diversity: Functional range
+
+
+`$$T_{max} - T_{min}$$` 
+
+
+&lt;img src="images/range.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Calculating functional diversity: Functional dispersion 
+
+$$ SD(\{d_i,\cdots, d_i\}) $$ 
+
+&lt;img src="images/TraitDis.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Inferring niche-based assembly processes with functional diversity changes along gradients 
+
+
+&lt;img src="images/TestHyp.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+class: inverse, center, middle
+
+## Redundancy analysis (RDA)
+
+
+---
+# Ordinations
+
+- Useful to represent the variance-covariance of multidimensional datasets
+
+- Techniques to reduce dataset dimensionality into fewer synthetic variables 
+
+- Descriptive of data-structure (Unconstrained)
+
+- e.g. Principal Component Analysis 
+
+
+.pull-left[
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-18-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+.pull-right[
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+# Canonical Analysis
+
+
+- Method first described by Rao (1964)
+ 
+ 
+&lt;img src="images/Rao.jpeg" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Canonical Analysis
+
+
+- Finds relationships between response and predictor matrices 
+
+- *Y* = Sites x Species | *X* = Sites x Environmental variables 
+
+- RDA | CCA 
+
+&lt;img src="images/SITES_ENVAR.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+---
+#  Redundancy analysis (RDA)
+
+
+- RDA - Redundancy analysis:
+
+- Combines multivariate linear regression and ordinations 
+
+- How much variance of in Y can be explained by the variance in X
+
+&lt;img src="images/MultivariateRe.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+# Redundancy analysis: Important considerations
+
+- Independence of observations 
+
+- Linear relationships between Y~X 
+
+- No multicolinearity 
+  - Plots and variance inflation factors, evaluate the need for transformation 
+  - Rare species are removed 
+
+- (# sites &gt;&gt; # predictors) 
+
+---
+# Redundancy analysis: Underlying mechanics 
+
+- 2 step process 
+
+- First multivariate regression, then PCA on fitted values 
+
+- Fits Y table to the linear combination of environmental variables 
+
+&lt;img src="images/constrained_ord_diagram.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+---
+# Redundancy analysis: Interpreting results
+
+&lt;img src="images/triplot.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+
+- 2 scalings
+
+1: Similarities between objects 
+
+2: Correlation among variables
+
+---
+# Redundancy analysis: Important technical questions
+
+- How many axes are required? 
+
+- Hypothesis test, by permutations?
+
+- How many variables are needed?
+
+- How important are my different variables? 
+
+- Which scaling report? 
+
+---
+class: inverse, center, middle
+
+## Case study: Relating species characteristics to their environment-Redundancy analysis (RDA)
+
+---
+# Case study: The geography of China
+
+
+&lt;img src="images/ChinaGeogrp.jpeg" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+# Case study: The China Plant Trait Database
+
+
+&lt;img src="images/ChinaPlantTrait.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## Case study: The China Plant Trait Database
+
+
+
+
+
+```
+#  [1] "ID"              "SAMPLE.ID"       "Average.LA..m2." "SLA..m2.kg."    
+#  [5] "LMA..kg.m2."     "LDMC..mg.g."     "Cmass..g.kg."    "Nmass..g.kg."   
+#  [9] "Pmass..g.kg."    "Kmass..g.kg."    "Narea..g.m2."    "Parea..g.m2."   
+# [13] "Karea..g.m2."    "d13C.12C"        "d15N.14N"
+#  [1] "Site.ID"           "Site.Name"         "Latitude"         
+#  [4] "Longitude"         "Elevation"         "Collection.month" 
+#  [7] "Collection.year"   "Source"            "Sampling.strategy"
+# [10] "References"
+```
+
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-29-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Case study: The China Plant Trait Database
+
+How many species are in the dataset? 
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-30-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Case study: The China Plant Trait Database
+
+
+```
+#   ID Site.ID Original.Genus Original.Species ACCEPTED.GENUS ACCEPTED.SPECIES
+# 1  1       1         Allium        senescens         Allium        senescens
+# 2  2       1      Artemisia          frigida      Artemisia          frigida
+# 3  3       1      Artemisia         sacrorum      Artemisia         gmelinii
+# 5  5       1     Astragalus       galactites     Astragalus       galactites
+# 6  6       1     Astragalus      scaberrimus     Astragalus      scaberrimus
+#   SPECIES.ID SAMPLE.ID Average.LA..m2. SLA..m2.kg. LMA..kg.m2. LDMC..mg.g.
+# 1       SP81         1      2.0010e-04    13.71253  0.07348235    353.7245
+# 2      SP142         2      1.0005e-05    24.32378  0.04121057    457.2960
+# 3      SP144         3      5.3360e-06    21.94605  0.04580574    336.3854
+# 5      SP176         5      1.0672e-04          NA          NA          NA
+# 6      SP182         6      6.6700e-05    12.14942  0.08294345    344.2806
+#   Cmass..g.kg. Nmass..g.kg. Pmass..g.kg. Kmass..g.kg. Narea..g.m2. Parea..g.m2.
+# 1           NA           NA           NA           NA           NA           NA
+# 2      544.229     20.31644     1.407591    16.522977    0.8352501   0.05786894
+# 3      459.178     21.10508     1.602951    18.167811    0.9616803   0.07304054
+# 5           NA           NA           NA           NA           NA           NA
+# 6      332.739     25.87347     1.266567     9.725709    2.1296051   0.10424916
+#   Karea..g.m2. d13C.12C d15N.14N
+# 1           NA       NA       NA
+# 2    0.6792932  -27.604   -2.863
+# 3    0.8278397  -26.892   -3.057
+# 5           NA       NA       NA
+# 6    0.8005080  -25.749   -2.167
+```
+
+
+---
+## Building the Y matrix: Handling missing data
+
+Do we have missing data? 
+
+
+```
+# [1] "##### How many NA per trait? ###### "
+#       Average.LA..m2. SLA..m2.kg. LMA..kg.m2. LDMC..mg.g. Cmass..g.kg.
+# FALSE            1018        1034        1034         900          771
+# TRUE              195         179         179         313          442
+#       Nmass..g.kg. Pmass..g.kg. Kmass..g.kg. Narea..g.m2. Parea..g.m2.
+# FALSE          922          666          619          918          664
+# TRUE           291          547          594          295          549
+#       Karea..g.m2. d13C.12C d15N.14N
+# FALSE          617      469      381
+# TRUE           596      744      832
+```
+
+
+---
+## Building the Y matrix: Variable standardization
+
+
+Range normalization
+
+`\(\frac{x-x_{min}}{x_{max} - x_{min}}\)`
+
+
+Mean + variance scaling 
+
+`\(\frac{x-mean}{sd}\)`
+
+
+
+&lt;img src="images/normalizeStandardize.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Building the Y matrix: Variable standardization
+
+Range normalization
+
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-34-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+## Building the Y matrix: Variable standardization
+
+Mean-variance scaling
+
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-35-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+## Building the Y matrix: Site-trait matrix 
+
+
+&lt;img src="images/SiteTraitMat.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+.alert[What to do with differences in species richness among sites?]
+
+
+---
+## Building the Y matrix: Site-trait matrix 
+
+
+How many species above a richness threshold? 
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-38-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Building the Y matrix: Site-trait matrix 
+
+
+&lt;img src="images/SiteTraitMat2.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+```
+# [1] "### Dimensions of Sites x traits ####"
+# [1] 83  6
+```
+
+---
+## Building the X matrix: Environmental variable matrix 
+
+
+
+```
+#   Site.ID  MAT....C. MI..unitless. alpha..unitless. GDD0...C.days. mGDD0....C.
+# 1       1 -0.5246671  -0.696001445       -0.5344169     -0.6404428  -0.5053884
+# 2       2 -0.5131194  -0.744489595       -0.6275897     -0.5746852  -0.3080644
+# 3       3 -0.3334891  -0.094307592        0.4396623     -0.4680040  -0.3276616
+# 4       4 -0.4455442   0.040136822        0.6598889     -0.6107659  -0.6165521
+# 5       5 -0.5138322  -0.001739307        0.6048323     -0.6824859  -0.7118353
+# 6       6 -0.4374181  -0.017167354        0.5794215     -0.6229639  -0.6297296
+#   PAR0..mol.photon.m.2. mPAR0..mol.photon.m.2. Prec.Timing..month.from.Jan1st.
+# 1            -0.3280314              0.8678624                       0.1804618
+# 2            -0.3795455              0.8322221                       0.1501914
+# 3            -0.9143590             -0.4281475                       0.1143916
+# 4            -0.9878796             -0.4047730                       0.1316360
+# 5            -0.9956074             -0.2561948                       0.1248712
+# 6            -0.9537671             -0.3263182                       0.1125261
+#   Prec.Seasonality..unitless.   MMP..mm.   MAP..mm.
+# 1                  0.93189191 -0.6594620 -0.6594516
+# 2                  1.08839665 -0.6971349 -0.6971410
+# 3                  0.14655210 -0.3346701 -0.3346600
+# 4                  0.10714967 -0.2774650 -0.2774633
+# 5                 -0.01189399 -0.3081798 -0.3081739
+# 6                 -0.01774873 -0.3062166 -0.3062066
+```
+
+---
+## Fitting the RDA
+
+
+```
+# Call: rda(formula = cwm.tab ~ MAT....C. + MI..unitless. +
+# alpha..unitless. + GDD0...C.days. + mGDD0....C. + PAR0..mol.photon.m.2.
+# + mPAR0..mol.photon.m.2. + Prec.Timing..month.from.Jan1st. +
+# Prec.Seasonality..unitless. + MMP..mm. + MAP..mm., data = ClimateSS[,
+# 2:12])
+# 
+#               Inertia Proportion Rank
+# Total         35.9552     1.0000     
+# Constrained    8.8486     0.2461    6
+# Unconstrained 27.1066     0.7539    6
+# Inertia is variance 
+# 
+# Eigenvalues for constrained axes:
+#  RDA1  RDA2  RDA3  RDA4  RDA5  RDA6 
+# 4.548 2.353 1.038 0.581 0.269 0.059 
+# 
+# Eigenvalues for unconstrained axes:
+#   PC1   PC2   PC3   PC4   PC5   PC6 
+# 8.331 7.309 4.272 3.756 2.437 1.002
+```
+
+---
+## Fitting the RDA
+
+- What if predictor variables are highly correlated? 
+
+- How to test for multicolinearity? 
+
+
+
+```
+# [1] "computing VIF using vegan::vif.cca | values above 10, indicate high multicolinearity"
+#                       MAT....C.                   MI..unitless. 
+#                            TRUE                            TRUE 
+#                alpha..unitless.                  GDD0...C.days. 
+#                            TRUE                            TRUE 
+#                     mGDD0....C.           PAR0..mol.photon.m.2. 
+#                            TRUE                            TRUE 
+#          mPAR0..mol.photon.m.2. Prec.Timing..month.from.Jan1st. 
+#                            TRUE                           FALSE 
+#     Prec.Seasonality..unitless.                        MMP..mm. 
+#                           FALSE                            TRUE 
+#                        MAP..mm. 
+#                            TRUE
+```
+
+
+---
+## Fitting the RDA: Multicolinearity
+
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-44-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+---
+## Fitting the RDA: Model examination 
+
+```
+# Permutation test for rda under reduced model
+# Terms added sequentially (first to last)
+# Permutation: free
+# Number of permutations: 999
+# 
+# Model: rda(formula = cwm.tab ~ MAT....C. + MI..unitless. + alpha..unitless. + GDD0...C.days. + mGDD0....C. + PAR0..mol.photon.m.2. + mPAR0..mol.photon.m.2. + Prec.Timing..month.from.Jan1st. + Prec.Seasonality..unitless. + MMP..mm. + MAP..mm., data = ClimateSS[, 2:12])
+#                                 Df Variance      F Pr(&gt;F)    
+# MAT....C.                        1   1.5927 4.1718  0.001 ***
+# MI..unitless.                    1   0.8065 2.1126  0.067 .  
+# alpha..unitless.                 1   2.5582 6.7006  0.001 ***
+# GDD0...C.days.                   1   1.7905 4.6898  0.002 ** 
+# mGDD0....C.                      1   0.4284 1.1220  0.346    
+# PAR0..mol.photon.m.2.            1   0.1928 0.5051  0.735    
+# mPAR0..mol.photon.m.2.           1   0.2153 0.5638  0.756    
+# Prec.Timing..month.from.Jan1st.  1   0.4403 1.1533  0.306    
+# Prec.Seasonality..unitless.      1   0.3608 0.9451  0.373    
+# MMP..mm.                         1   0.3660 0.9586  0.401    
+# MAP..mm.                         1   0.0971 0.2543  0.952    
+# Residual                        71  27.1066                  
+# ---
+# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+---
+## Fitting the RDA: Reducing model complexity 
+
+
+```
+# Step: R2.adj= 0 
+# Call: cwm.tab ~ 1 
+#  
+#                                    R2.adjusted
+# &lt;All variables&gt;                    0.129298683
+# + MMP..mm.                         0.053889717
+# + MAP..mm.                         0.053889601
+# + mGDD0....C.                      0.044708054
+# + GDD0...C.days.                   0.041720641
+# + MI..unitless.                    0.037541742
+# + MAT....C.                        0.032498196
+# + PAR0..mol.photon.m.2.            0.021426807
+# + Prec.Timing..month.from.Jan1st.  0.019181646
+# + Prec.Seasonality..unitless.      0.016333179
+# + mPAR0..mol.photon.m.2.           0.011425735
+# &lt;none&gt;                             0.000000000
+# + alpha..unitless.                -0.002271421
+# 
+#            Df    AIC      F Pr(&gt;F)   
+# + MMP..mm.  1 294.71 5.6707  0.002 **
+# ---
+# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+# 
+# Step: R2.adj= 0.05388972 
+# Call: cwm.tab ~ MMP..mm. 
+#  
+#                                   R2.adjusted
+# &lt;All variables&gt;                    0.12929868
+# + mGDD0....C.                      0.08107884
+# + alpha..unitless.                 0.07429096
+# + GDD0...C.days.                   0.07138627
+# + mPAR0..mol.photon.m.2.           0.07135295
+# + MI..unitless.                    0.05863669
+# + Prec.Seasonality..unitless.      0.05591863
+# + MAT....C.                        0.05405431
+# &lt;none&gt;                             0.05388972
+# + PAR0..mol.photon.m.2.            0.04830147
+# + MAP..mm.                         0.04829088
+# + Prec.Timing..month.from.Jan1st.  0.04696096
+# 
+#               Df    AIC      F Pr(&gt;F)  
+# + mGDD0....C.  1 293.25 3.3966  0.012 *
+# ---
+# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+# 
+# Step: R2.adj= 0.08107884 
+# Call: cwm.tab ~ MMP..mm. + mGDD0....C. 
+#  
+#                                   R2.adjusted
+# &lt;All variables&gt;                    0.12929868
+# + alpha..unitless.                 0.12660619
+# + mPAR0..mol.photon.m.2.           0.09774370
+# + MAT....C.                        0.08987301
+# + GDD0...C.days.                   0.08904355
+# + MI..unitless.                    0.08830164
+# + PAR0..mol.photon.m.2.            0.08659817
+# + Prec.Seasonality..unitless.      0.08380346
+# &lt;none&gt;                             0.08107884
+# + MAP..mm.                         0.07441159
+# + Prec.Timing..month.from.Jan1st.  0.07360045
+# 
+#                    Df    AIC      F Pr(&gt;F)   
+# + alpha..unitless.  1 289.99 5.1702  0.004 **
+# ---
+# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+# 
+# Step: R2.adj= 0.1266062 
+# Call: cwm.tab ~ MMP..mm. + mGDD0....C. + alpha..unitless. 
+#  
+#                                   R2.adjusted
+# + PAR0..mol.photon.m.2.             0.1447464
+# + MAT....C.                         0.1412856
+# + GDD0...C.days.                    0.1411683
+# + MI..unitless.                     0.1374076
+# + Prec.Seasonality..unitless.       0.1308110
+# &lt;All variables&gt;                     0.1292987
+# &lt;none&gt;                              0.1266062
+# + mPAR0..mol.photon.m.2.            0.1249962
+# + MAP..mm.                          0.1197387
+# + Prec.Timing..month.from.Jan1st.   0.1193242
+```
+
+
+
+
+
+---
+## Fitting the RDA: Reducing model complexity 
+
+
+```
+# rda(formula = cwm.tab ~ MMP..mm. + mGDD0....C. + alpha..unitless., 
+#     data = ClimateSS[, 2:12])
+# Call: rda(formula = cwm.tab ~ MMP..mm. + mGDD0....C. +
+# alpha..unitless., data = ClimateSS[, 2:12])
+# 
+#               Inertia Proportion Rank
+# Total         35.9552     1.0000     
+# Constrained    5.7010     0.1586    3
+# Unconstrained 30.2541     0.8414    6
+# Inertia is variance 
+# 
+# Eigenvalues for constrained axes:
+#  RDA1  RDA2  RDA3 
+# 3.891 1.719 0.091 
+# 
+# Eigenvalues for unconstrained axes:
+#   PC1   PC2   PC3   PC4   PC5   PC6 
+# 9.291 8.158 4.492 4.241 2.986 1.086
+```
+
+
+---
+## Fitting the RDA: Model examination 
+
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-48-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Fitting the RDA: Model examination 
+
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-49-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Fitting the RDA: Model examination 
+
+
+
+
+```
+# Permutation test for rda under reduced model
+# Terms added sequentially (first to last)
+# Permutation: free
+# Number of permutations: 999
+# 
+# Model: rda(formula = cwm.tab ~ MMP..mm. + mGDD0....C. + alpha..unitless., data = ClimateSS[, 2:12])
+#                  Df Variance      F Pr(&gt;F)    
+# MMP..mm.          1   2.3525 6.1428  0.001 ***
+# mGDD0....C.       1   1.3686 3.5737  0.008 ** 
+# alpha..unitless.  1   1.9800 5.1702  0.001 ***
+# Residual         79  30.2541                  
+# ---
+# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+
+---
+## Fitting the RDA: Model examination 
+
+
+```
+# Permutation test for rda under reduced model
+# Forward tests for axes
+# Permutation: free
+# Number of permutations: 999
+# 
+# Model: rda(formula = cwm.tab ~ MMP..mm. + mGDD0....C. + alpha..unitless., data = ClimateSS[, 2:12])
+#          Df Variance       F Pr(&gt;F)    
+# RDA1      1   3.8911 10.1606  0.001 ***
+# RDA2      1   1.7189  4.4885  0.005 ** 
+# RDA3      1   0.0910  0.2376  0.949    
+# Residual 79  30.2541                   
+# ---
+# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="R-macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
