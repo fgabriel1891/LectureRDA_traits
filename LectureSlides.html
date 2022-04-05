@@ -126,9 +126,21 @@ class: inverse, center, middle
 
 
 ---
+#  Climate limits biodiversity
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/WhittkerPlot.png" alt="Whittaker plot" width="50%" /&gt;
+&lt;p class="caption"&gt;Whittaker plot&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+
+---
 # The dimensions of biodiversity
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -308,13 +320,13 @@ class: inverse, center, middle
 
 
 .pull-left[
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-19-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-20-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 ]
 
 
 .pull-right[
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-20-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -434,7 +446,7 @@ class: inverse, center, middle
 ```
 
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-30-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-31-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -442,7 +454,7 @@ class: inverse, center, middle
 
 How many species are in the dataset? 
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-31-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-32-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -522,7 +534,7 @@ Mean + variance scaling
 Range normalization
 
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-35-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-36-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ---
 # Building the Y matrix: Variable standardization
@@ -530,7 +542,7 @@ Range normalization
 Mean-variance scaling
 
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-36-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-37-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -551,7 +563,7 @@ Mean-variance scaling
 
 How many species above a richness threshold? 
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-39-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-40-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -560,6 +572,12 @@ How many species above a richness threshold?
 
 
 &lt;img src="images/SiteTraitMat2.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+# Building the Y matrix: Site-trait matrix 
+
 
 
 ```r
@@ -663,7 +681,7 @@ vegan::vif.cca(myRDA) &gt;10
 # Fitting the RDA: Multicolinearity
 
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-45-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-46-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 ---
 # Fitting the RDA: Model examination 
@@ -677,17 +695,17 @@ anova(myRDA, by = "term")
 # 
 # Model: rda(formula = cwm.tab ~ MAT....C. + MI..unitless. + alpha..unitless. + GDD0...C.days. + mGDD0....C. + PAR0..mol.photon.m.2. + mPAR0..mol.photon.m.2. + Prec.Timing..month.from.Jan1st. + Prec.Seasonality..unitless. + MMP..mm. + MAP..mm., data = ClimateSS[, 2:12])
 #                                 Df Variance      F Pr(&gt;F)    
-# MAT....C.                        1   1.5598 4.0536  0.002 ** 
-# MI..unitless.                    1   0.8443 2.1942  0.045 *  
+# MAT....C.                        1   1.5598 4.0536  0.001 ***
+# MI..unitless.                    1   0.8443 2.1942  0.062 .  
 # alpha..unitless.                 1   2.5982 6.7522  0.001 ***
 # GDD0...C.days.                   1   1.8246 4.7418  0.003 ** 
-# mGDD0....C.                      1   0.4508 1.1714  0.312    
-# PAR0..mol.photon.m.2.            1   0.1800 0.4677  0.742    
-# mPAR0..mol.photon.m.2.           1   0.2165 0.5628  0.707    
-# Prec.Timing..month.from.Jan1st.  1   0.4488 1.1663  0.336    
-# Prec.Seasonality..unitless.      1   0.3492 0.9076  0.392    
-# MMP..mm.                         1   0.3636 0.9450  0.439    
-# MAP..mm.                         1   0.0831 0.2160  0.964    
+# mGDD0....C.                      1   0.4508 1.1714  0.323    
+# PAR0..mol.photon.m.2.            1   0.1800 0.4677  0.771    
+# mPAR0..mol.photon.m.2.           1   0.2165 0.5628  0.730    
+# Prec.Timing..month.from.Jan1st.  1   0.4488 1.1663  0.306    
+# Prec.Seasonality..unitless.      1   0.3492 0.9076  0.372    
+# MMP..mm.                         1   0.3636 0.9450  0.443    
+# MAP..mm.                         1   0.0831 0.2160  0.963    
 # Residual                        71  27.3200                  
 # ---
 # Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -745,7 +763,7 @@ fwd.sel &lt;- ordiR2step(rda(cwm.tab ~ 1, data = ClimateSS[,2:12]),
 # + Prec.Timing..month.from.Jan1st.  0.04630581
 # 
 #               Df   AIC      F Pr(&gt;F)  
-# + mGDD0....C.  1 293.9 3.4156  0.018 *
+# + mGDD0....C.  1 293.9 3.4156  0.012 *
 # ---
 # Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 # 
@@ -1085,7 +1103,7 @@ anova(myRDA2, by = "term")
 # Model: rda(formula = cwm.tab ~ MMP..mm. + mGDD0....C. + alpha..unitless., data = ClimateSS[, 2:12])
 #                  Df Variance      F Pr(&gt;F)    
 # MMP..mm.          1   2.3665 6.1287  0.001 ***
-# mGDD0....C.       1   1.3870 3.5920  0.007 ** 
+# mGDD0....C.       1   1.3870 3.5920  0.011 *  
 # alpha..unitless.  1   1.9813 5.1312  0.001 ***
 # Residual         79  30.5042                  
 # ---
@@ -1108,7 +1126,7 @@ anova(myRDA2, step = 1000, by = "axis")
 # Model: rda(formula = cwm.tab ~ MMP..mm. + mGDD0....C. + alpha..unitless., data = ClimateSS[, 2:12])
 #          Df Variance       F Pr(&gt;F)    
 # RDA1      1   3.9007 10.1021  0.001 ***
-# RDA2      1   1.7402  4.5068  0.007 ** 
+# RDA2      1   1.7402  4.5068  0.009 ** 
 # RDA3      1   0.0938  0.2430  0.954    
 # Residual 79  30.5042                   
 # ---
@@ -1127,13 +1145,13 @@ anova(myRDA2, step = 1000, by = "axis")
 
 1: Correlation among variables
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-53-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-54-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 ---
 # Fitting the RDA: Model examination 
 
-&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-54-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="LectureSlides_files/figure-html/unnamed-chunk-55-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 
